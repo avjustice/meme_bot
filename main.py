@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 async def start(update, context):
     user = update.effective_user
+    logger.info('%s стартанул бота', user.first_name)
     await update.message.reply_text(
         f"Здравствуйте, {user.first_name}. Это бот со случайными мемами.\n",
         reply_markup=ReplyKeyboardMarkup([['Покажи мемчик!']])
@@ -21,6 +22,7 @@ async def start(update, context):
 async def meme(update, context):
     response = requests.get('https://meme-api.com/gimme').json()
     await update.message.reply_photo(response['url'], reply_markup=ReplyKeyboardMarkup([['Еще мемчик!']]))
+    logger.info('%s смотрит мем %s', update.effective_user.first_name, response['url'])
 
 
 def main():

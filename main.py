@@ -21,8 +21,9 @@ async def start(update, context):
 
 async def meme(update, context):
     response = requests.get('https://meme-api.com/gimme').json()
-    await update.message.reply_photo(response['url'],
-                                     reply_markup=ReplyKeyboardMarkup([['Еще мемчик!']], resize_keyboard=True))
+    await update.message.reply_photo(
+        response['url'],
+        reply_markup=ReplyKeyboardMarkup([['Еще мемчик!']], resize_keyboard=True))
     logger.info('%s смотрит мем %s', update.effective_user.first_name, response['url'])
 
 
